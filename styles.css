@@ -1,0 +1,113 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  flex-direction: column;
+  /* background: #8c0a5e; */
+  background-color: #560a24;
+  opacity: 1;
+  background-image: linear-gradient(135deg, #6a0a48 25%, transparent 25%), linear-gradient(225deg, #6a0a48 25%, transparent 25%), linear-gradient(45deg, #6a0a48 25%, transparent 25%), linear-gradient(315deg, #6a0a48 25%, #560a24 25%);
+  background-position: 40px 0, 40px 0, 0 0, 0 0;
+  background-size: 80px 80px;
+  background-repeat: repeat;
+}
+
+#pagetitle {
+  position: relative;
+  font-size: 4.5vw;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+
+#subtitle {
+  position: relative;
+  font-size: 2.5vw;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+
+@media (min-width: 992px) {
+  .memory-game {
+    width: 1100px;
+    height: 480px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .memory-card {
+    width: calc(16.666% - 10px);
+    height: calc(50% - 10px);
+    margin: 5px;
+    position: relative;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+}
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .memory-game {
+    width: 640px;
+    height: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .memory-card {
+    width: calc(25% - 10px);
+    height: calc(33.333% - 10px);
+    margin: 5px;
+    position: relative;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
+}
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform 0.2s;
+}
+
+.memory-card.flip,
+.memory-card.flip:hover {
+  transform: rotateY(180deg);
+}
+
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  border-radius: 5px;
+  backface-visibility: hidden;
+  /* background: #DF752B; */
+  /* outline: 10px solid #b65930; */
+  outline: 10px solid #800e43;
+  outline-offset: -10px;
+  background-color: #800e43;
+  opacity: 1;
+  background-image: linear-gradient(30deg, #de1476 12%, transparent 12.5%, transparent 87%, #de1476 87.5%, #de1476), linear-gradient(150deg, #de1476 12%, transparent 12.5%, transparent 87%, #de1476 87.5%, #de1476), linear-gradient(30deg, #de1476 12%, transparent 12.5%, transparent 87%, #de1476 87.5%, #de1476), linear-gradient(150deg, #de1476 12%, transparent 12.5%, transparent 87%, #de1476 87.5%, #de1476), linear-gradient(60deg, #de147677 25%, transparent 25.5%, transparent 75%, #de147677 75%, #de147677), linear-gradient(60deg, #de147677 25%, transparent 25.5%, transparent 75%, #de147677 75%, #de147677);
+  background-size: 80px 140px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+}
+
+.front-face {
+  transform: rotateY(180deg);
+}
+
+.memory-card:hover {
+  transform: scale(1.04);
+}
+
+/*# sourceMappingURL=styles.css.map */

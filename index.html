@@ -1,0 +1,113 @@
+<!DOCTYPE html5>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Memorama</title>
+
+    <link rel="stylesheet" href="./bootstrap-5.1.3-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+
+    <!-- Titles -->
+    <header class="my-5">
+        <div class="container">
+            <div class="text-center">
+                <div class="row">
+                    <h1 id="pagetitle">Memorama del Voto Ciudadano</h1>
+                    <h2 id="subtitle" class="opacity-75">El voto y sus características</h2>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Card Game -->
+    <main class="mx-auto my-3">
+        <div class="container">
+            <section class="memory-game">
+                <div class="memory-card" data-number="uno">
+                    <img class="front-face" src="img/uno.png" alt="Carta del derecho Universal" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+                <div class="memory-card" data-number="uno">
+                    <img class="front-face" src="img/uno.png" alt="Carta del derecho Universal" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+
+                <div class="memory-card" data-number="dos">
+                    <img class="front-face" src="img/dos.png" alt="Carta del derecho Secreto" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+                <div class="memory-card" data-number="dos">
+                    <img class="front-face" src="img/dos.png" alt="Carta del derecho Secreto" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+
+                <div class="memory-card" data-number="tres">
+                    <img class="front-face" src="img/tres.png" alt="Carta del derecho Directo" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+                <div class="memory-card" data-number="tres">
+                    <img class="front-face" src="img/tres.png" alt="Carta del derecho Directo" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+
+                <div class="memory-card" data-number="cuatro">
+                    <img class="front-face" src="img/cuatro.png" alt="Carta del derecho Personal" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+                <div class="memory-card" data-number="cuatro">
+                    <img class="front-face" src="img/cuatro.png" alt="Carta del derecho Personal" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+
+                <div class="memory-card" data-number="cinco">
+                    <img class="front-face" src="img/cinco.png" alt="Carta del derecho Intrasferible" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+                <div class="memory-card" data-number="cinco">
+                    <img class="front-face" src="img/cinco.png" alt="Carta del derecho Intrasferible" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+
+                <div class="memory-card" data-number="seis">
+                    <img class="front-face" src="img/seis.png" alt="Carta del derecho Libre" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+                <div class="memory-card" data-number="seis">
+                    <img class="front-face" src="img/seis.png" alt="Carta del derecho Libre" />
+                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+
+    <!-- Boostrap Modal -->
+    <section>
+        <div class="modal fade" id="modalconcepto" tabindex="-1" aria-labelledby="title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-1" id="title">Titulo del contepo</h1>
+                    </div>
+                    <div class="modal-body fs-2" id="concept">
+                        Concepto a describir
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="./bootstrap-5.1.3-dist/js/bootstrap.js"></script>
+    <script type="module" src="./scripts.js"></script>
+</body>
+
+</html>
