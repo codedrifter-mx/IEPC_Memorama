@@ -1,5 +1,6 @@
 const cards = document.querySelectorAll('.memory-card');
 const ModalConcepto = new bootstrap.Modal(document.getElementById('modalconcepto'))
+const ModalVictoria = new bootstrap.Modal(document.getElementById('modalvictoria'))
 
 const info = {
     "uno": {
@@ -32,7 +33,6 @@ let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 
-
 function flipCard() {
     if (lockBoard) return;
     if (this === firstCard) return;
@@ -45,8 +45,6 @@ function flipCard() {
 
         return;
     }
-
-
 
     secondCard = this;
     checkForMatch();
@@ -70,6 +68,7 @@ function disableCards() {
 
     resetBoard();
 
+    checkCards();
 }
 
 function unflipCards() {
@@ -88,6 +87,21 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
 }
 
+function checkCards() {
+    let isVictory = true
+    cards.forEach(card => {
+        if (!isVictory) {
+            return
+        }
+
+        isVictory = card.classList.contains('flip')
+    });
+
+    if (isVictory) {
+        document.getElementById('modalconcepto').addEventListener('hidden.bs.modal', victoryEvent)
+    }
+}
+
 (function shuffle() {
     cards.forEach(card => {
         let randomPos = Math.floor(Math.random() * 12);
@@ -101,4 +115,8 @@ function check(e) {
     if (e.key === "Enter") {
         ModalConcepto.hide()
     }
+}
+
+function victoryEvent(event) {
+    ModalVictoria.show()
 }
