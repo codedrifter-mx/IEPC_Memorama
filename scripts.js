@@ -1,6 +1,17 @@
+talkify.config.remoteService.host = 'https://talkify.net';
+talkify.config.remoteService.apiKey = 'af69f150-cff6-4ebf-a2d2-70945c87b391';
+
+var player = new talkify.TtsPlayer().enableTextHighlighting();
+var isblind = false;
+
 const cards = document.querySelectorAll('.memory-card');
 const ModalConcepto = new bootstrap.Modal(document.getElementById('modalconcepto'))
 const ModalVictoria = new bootstrap.Modal(document.getElementById('modalvictoria'))
+
+document.getElementById("btn-check").addEventListener("click", tssIsBlind);
+document.querySelectorAll(".memory-card").forEach(card => {
+    card.addEventListener('mouseover', tssHoverCard);
+});
 
 const info = {
     "uno": {
@@ -43,10 +54,26 @@ function flipCard() {
         hasFlippedCard = true;
         firstCard = this;
 
+        if (isblind) {
+            let key = firstCard.getAttribute("data-number");
+            tssReadCard(info[key]["title"])
+        }
+
+        firstCard.removeEventListener('mouseover', tssHoverCard);
+
         return;
     }
 
     secondCard = this;
+
+    if (isblind) {
+        let key = secondCard.getAttribute("data-number");
+        tssReadCard(info[key]["title"])
+    }
+
+    secondCard.removeEventListener('mouseover', tssHoverCard);
+
+
     checkForMatch();
 }
 
@@ -66,6 +93,10 @@ function disableCards() {
 
     ModalConcepto.show()
 
+    if (isblind) {
+        tssReadModal()
+    }
+
     resetBoard();
 
     checkCards();
@@ -73,6 +104,11 @@ function disableCards() {
 
 function unflipCards() {
     lockBoard = true;
+
+    firstCard.addEventListener('mouseover', tssHoverCard);
+    secondCard.addEventListener('mouseover', tssHoverCard);
+
+    tssFailCard()
 
     setTimeout(() => {
         firstCard.classList.remove('flip');
@@ -119,4 +155,48 @@ function check(e) {
 
 function victoryEvent(event) {
     ModalVictoria.show()
+}
+
+function tssIsBlind() {
+    isblind = !isblind
+
+    if (isblind) {
+        var playlist = new talkify.playlist()
+            .begin()
+            .usingPlayer(player)
+            .withElements(document.querySelectorAll('.tts'))
+            .withTextInteraction()
+            .build();
+
+        playlist.play();
+    }
+}
+
+function tssHoverCard() {
+    if (isblind) {
+        player.playText('¿Voltear carta?');
+    }
+}
+
+function tssReadCard(word) {
+    if (isblind) {
+        player.playText(word);
+    }
+}
+
+function tssFailCard() {
+    if (isblind) {
+        player.playText('Intenta de nuevo');
+    }
+}
+
+function tssReadModal() {
+    var playlist = new talkify.playlist()
+        .begin()
+        .usingPlayer(player)
+        .withElements(document.querySelectorAll('.tts-modal'))
+        .withTextInteraction()
+        .build();
+
+    playlist.play();
 }

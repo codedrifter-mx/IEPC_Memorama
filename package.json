@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "talkify-tts": "^3.9.0"
+  }
+}
