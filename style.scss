@@ -121,6 +121,11 @@ body {
     transform: rotateY(180deg);
 }
 
+img {
+    object-fit: contain;
+    width: 100%;
+}
+
 .memory-card:hover {
     transform: scale(1.04);
 }

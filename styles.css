@@ -142,6 +142,11 @@ body {
   transform: rotateY(180deg);
 }
 
+img {
+  object-fit: contain;
+  width: 100%;
+}
+
 .memory-card:hover {
   transform: scale(1.04);
 }
@@ -157,7 +162,7 @@ body {
 
 a {
   color: #590734;
-  text-decoration: none;
+  text-decoration-line: none;
   background-color: transparent;
 }
 

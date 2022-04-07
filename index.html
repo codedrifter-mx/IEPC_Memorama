@@ -76,10 +76,18 @@
 
     <div class="my-2">
         <div class="container">
-            <div class="row justify-content-start">
-                <div>
-                    <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off">
-                    <label class="btn btn-primary" for="btn-check">Discapacidad Visual</label>
+            <div class="row text-center">
+                <div class="col">
+                    <input type="checkbox" class="btn-check" id="isblind" autocomplete="off">
+                    <label class="btn btn-primary" for="isblind" id="labelisblind">Discapacidad</label>
+                </div>
+
+                <div class="col">
+                    <button type="button" class="btn btn-primary " id="retry">Jugar nuevamente</button>
+                </div>
+
+                <div class="col">
+                    <button type="button" class="btn btn-primary" id="intro">Instrucciones</button>
                 </div>
             </div>
         </div>
@@ -155,13 +163,13 @@
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title fs-1 tts-modal" id="title">Titulo del concepto</h3>
+                        <h1 class="modal-title fs-1 tts-modal" id="title">Titulo del concepto</h1>
                     </div>
                     <div class="modal-body align-content-center">
-                        <h4 class="tts-modal" id="concept">Concepto a describir</h4>
+                        <h2 class="tts-modal" id="concept">Concepto a describir</h2>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-lg tts-modal" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                        <button type="button" class="btn btn-primary btn-lg tts-modal" data-bs-dismiss="modal" aria-label="Close" id="closemodal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -171,13 +179,13 @@
             <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title fs-1" id="title">¡Ganaste!</h3>
+                        <h1 class="modal-title fs-1" id="title">¡Ganaste!</h1>
                     </div>
                     <div class="modal-body align-content-center">
-                        <h4 id="concept">¡Ahora conoces tus derechos para el voto!</h4>
+                        <h2 id="concept">¡Ahora conoces las características del voto!</h2>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close" id="closewin">Cerrar</button>
                     </div>
                 </div>
             </div>

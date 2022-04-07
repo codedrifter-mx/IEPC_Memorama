@@ -1,14 +1,20 @@
-talkify.config.remoteService.host = 'https://talkify.net';
-talkify.config.remoteService.apiKey = 'af69f150-cff6-4ebf-a2d2-70945c87b391';
-
-var player = new talkify.TtsPlayer().enableTextHighlighting();
 var isblind = false;
+var soundmaster = new Audio();
 
 const cards = document.querySelectorAll('.memory-card');
 const ModalConcepto = new bootstrap.Modal(document.getElementById('modalconcepto'))
 const ModalVictoria = new bootstrap.Modal(document.getElementById('modalvictoria'))
 
-document.getElementById("btn-check").addEventListener("click", tssIsBlind);
+document.getElementById("isblind").addEventListener("click", setBlind);
+document.getElementById("intro").addEventListener("click", playintro);
+document.getElementById("retry").addEventListener("click", retry);
+
+document.getElementById("labelisblind").addEventListener("mouseover", ttsIsBlind);
+document.getElementById("intro").addEventListener("mouseover", ttsTuto);
+document.getElementById("retry").addEventListener("mouseover", ttsRetry);
+document.getElementById("closemodal").addEventListener("mouseover", ttsCloseModal);
+document.getElementById("closewin").addEventListener("mouseover", ttsCloseModal);
+
 document.querySelectorAll(".memory-card").forEach(card => {
     card.addEventListener('mouseover', tssHoverCard);
 });
@@ -73,7 +79,6 @@ function flipCard() {
 
     secondCard.removeEventListener('mouseover', tssHoverCard);
 
-
     checkForMatch();
 }
 
@@ -94,7 +99,7 @@ function disableCards() {
     ModalConcepto.show()
 
     if (isblind) {
-        tssReadModal()
+        tssReadModal(info[key]["title"])
     }
 
     resetBoard();
@@ -138,12 +143,14 @@ function checkCards() {
     }
 }
 
-(function shuffle() {
+function shuffle() {
     cards.forEach(card => {
         let randomPos = Math.floor(Math.random() * 12);
         card.style.order = randomPos;
     });
-})();
+};
+
+shuffle()
 
 cards.forEach(card => card.addEventListener('click', flipCard));
 
@@ -154,49 +161,101 @@ function check(e) {
 }
 
 function victoryEvent(event) {
+
+    soundmaster.pause()
+    soundmaster = new Audio('./audio/win.mp3')
+    soundmaster.play()
+
     ModalVictoria.show()
 }
 
-function tssIsBlind() {
+function retry() {
+    resetBoard()
+    document.getElementById('modalconcepto').removeEventListener('hidden.bs.modal', victoryEvent)
+    cards.forEach(card => {
+        card.addEventListener('mouseover', tssHoverCard);
+        card.addEventListener('click', flipCard)
+        card.classList.remove('flip')
+    });
+    shuffle()
+}
+
+function ttsIsBlind() {
+    if (isblind) {
+        soundmaster.pause()
+        soundmaster = new Audio('./audio/off.mp3')
+        soundmaster.play()
+    }
+}
+
+function ttsRetry() {
+    if (isblind) {
+        soundmaster.pause()
+        soundmaster = new Audio('./audio/again.mp3')
+        soundmaster.play()
+    }
+}
+
+function ttsCloseModal() {
+    if (isblind) {
+        soundmaster.pause()
+        soundmaster = new Audio('./audio/closemodal.mp3')
+        soundmaster.play()
+    }
+}
+
+function ttsTuto() {
+    if (isblind) {
+        soundmaster.pause()
+        soundmaster = new Audio('./audio/tuto.mp3')
+        soundmaster.play()
+    }
+}
+
+function setBlind() {
     isblind = !isblind
 
     if (isblind) {
-        var playlist = new talkify.playlist()
-            .begin()
-            .usingPlayer(player)
-            .withElements(document.querySelectorAll('.tts'))
-            .withTextInteraction()
-            .build();
-
-        playlist.play();
+        playintro()
     }
+}
+
+function playintro() {
+    soundmaster.pause()
+    soundmaster = new Audio('./audio/instrucciones.mp3')
+    soundmaster.play()
 }
 
 function tssHoverCard() {
     if (isblind) {
-        player.playText('¿Voltear carta?');
+        soundmaster.pause()
+        soundmaster = new Audio('./audio/flip.mp3')
+        soundmaster.play()
     }
 }
 
 function tssReadCard(word) {
     if (isblind) {
-        player.playText(word);
+        soundmaster.pause()
+        soundmaster = new Audio('./audio/' + word + '.mp3')
+        soundmaster.play()
     }
 }
 
 function tssFailCard() {
     if (isblind) {
-        player.playText('Intenta de nuevo');
+        setTimeout(() => {
+            soundmaster.pause()
+            soundmaster = new Audio('./audio/unflip.mp3')
+            soundmaster.play()
+        }, 1000);
     }
 }
 
-function tssReadModal() {
-    var playlist = new talkify.playlist()
-        .begin()
-        .usingPlayer(player)
-        .withElements(document.querySelectorAll('.tts-modal'))
-        .withTextInteraction()
-        .build();
-
-    playlist.play();
+function tssReadModal(word) {
+    if (isblind) {
+        soundmaster.pause()
+        soundmaster = new Audio('./audio/' + word + '_concept.mp3')
+        soundmaster.play()
+    }
 }
