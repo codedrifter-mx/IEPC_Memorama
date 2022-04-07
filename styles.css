@@ -7,12 +7,10 @@
 body {
   flex-direction: column;
   /* background: #8c0a5e; */
-  background-color: #560a24;
-  opacity: 1;
-  background-image: linear-gradient(135deg, #6a0a48 25%, transparent 25%), linear-gradient(225deg, #6a0a48 25%, transparent 25%), linear-gradient(45deg, #6a0a48 25%, transparent 25%), linear-gradient(315deg, #6a0a48 25%, #560a24 25%);
-  background-position: 150px 0, 150px 0, 0 0, 0 0;
-  background-size: 150px 150px;
-  background-repeat: repeat;
+  background-image: url("./img/Mesa.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #pagetitle {
@@ -20,7 +18,7 @@ body {
   text-decoration: underline;
   font-size: calc(1.425rem + 2.1vw);
   font-weight: bold;
-  color: #ffffff;
+  color: #560a24;
   font-family: "Poppins", sans-serif;
 }
 @media (min-width: 1200px) {
@@ -33,7 +31,7 @@ body {
   position: relative;
   font-size: calc(1.375rem + 1.5vw);
   font-weight: bold;
-  color: #ffffff;
+  color: #560a24;
   font-family: "Poppins", sans-serif;
 }
 @media (min-width: 1200px) {
@@ -66,7 +64,7 @@ body {
     text-decoration: underline;
     font-size: calc(1.325rem + 0.9vw);
     font-weight: bold;
-    color: #ffffff;
+    color: #560a24;
     font-family: "Poppins", sans-serif;
   }
 }
@@ -80,7 +78,7 @@ body {
     position: relative;
     font-size: calc(1.275rem + 0.3vw);
     font-weight: bold;
-    color: #ffffff;
+    color: #560a24;
     font-family: "Poppins", sans-serif;
   }
 }
@@ -123,19 +121,16 @@ body {
 .back-face {
   width: 100%;
   height: 100%;
-  padding: 20px;
   position: absolute;
   border-radius: 5px;
   backface-visibility: hidden;
-  /* background: #DF752B; */
-  /* outline: 10px solid #b65930; */
-  outline: 10px solid #800e43;
-  outline-offset: -10px;
-  background-color: #800e43;
+  outline: 5px solid #800e43;
+  outline-offset: -5px;
   opacity: 1;
-  background-image: linear-gradient(30deg, #de1476 12%, transparent 12.5%, transparent 87%, #de1476 87.5%, #de1476), linear-gradient(150deg, #de1476 12%, transparent 12.5%, transparent 87%, #de1476 87.5%, #de1476), linear-gradient(30deg, #de1476 12%, transparent 12.5%, transparent 87%, #de1476 87.5%, #de1476), linear-gradient(150deg, #de1476 12%, transparent 12.5%, transparent 87%, #de1476 87.5%, #de1476), linear-gradient(60deg, #de147677 25%, transparent 25.5%, transparent 75%, #de147677 75%, #de147677), linear-gradient(60deg, #de147677 25%, transparent 25.5%, transparent 75%, #de147677 75%, #de147677);
-  background-size: 80px 140px;
-  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+  background-image: url("./img/back.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .front-face {
@@ -143,8 +138,7 @@ body {
 }
 
 img {
-  object-fit: contain;
-  width: 100%;
+  object-fit: cover;
 }
 
 .memory-card:hover {
@@ -158,6 +152,13 @@ img {
 
 .modal-footer {
   border-top: none;
+}
+
+.modal-content {
+  background-image: url("./img/modal.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 a {
