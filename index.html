@@ -78,7 +78,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col">
-                    <input type="checkbox" class="btn-check" id="isblind" autocomplete="off">
+                    <input type="checkbox" class="btn btn-check" id="isblind" autocomplete="off">
                     <label class="btn btn-primary" for="isblind" id="labelisblind">Discapacidad</label>
                 </div>
 
@@ -107,47 +107,47 @@
                 </div>
 
                 <div class="memory-card" data-number="dos">
-                    <img class="front-face" src="img/dos.png" alt="Carta del derecho Secreto" />
+                    <img class="front-face" src="img/secreto.jpg" alt="Carta del derecho Secreto" />
                     <div class="back-face"> </div>
                 </div>
                 <div class="memory-card" data-number="dos">
-                    <img class="front-face" src="img/dos.png" alt="Carta del derecho Secreto" />
+                    <img class="front-face" src="img/secreto.jpg" alt="Carta del derecho Secreto" />
                     <div class="back-face"> </div>
                 </div>
 
                 <div class="memory-card" data-number="tres">
-                    <img class="front-face" src="img/tres.png" alt="Carta del derecho Directo" />
+                    <img class="front-face" src="img/directo.jpg" alt="Carta del derecho Directo" />
                     <div class="back-face"> </div>
                 </div>
                 <div class="memory-card" data-number="tres">
-                    <img class="front-face" src="img/tres.png" alt="Carta del derecho Directo" />
+                    <img class="front-face" src="img/directo.jpg" alt="Carta del derecho Directo" />
                     <div class="back-face"> </div>
                 </div>
 
                 <div class="memory-card" data-number="cuatro">
-                    <img class="front-face" src="img/cuatro.png" alt="Carta del derecho Personal" />
+                    <img class="front-face" src="img/personal.jpg" alt="Carta del derecho Personal" />
                     <div class="back-face"> </div>
                 </div>
                 <div class="memory-card" data-number="cuatro">
-                    <img class="front-face" src="img/cuatro.png" alt="Carta del derecho Personal" />
+                    <img class="front-face" src="img/personal.jpg" alt="Carta del derecho Personal" />
                     <div class="back-face"> </div>
                 </div>
 
                 <div class="memory-card" data-number="cinco">
-                    <img class="front-face" src="img/cinco.png" alt="Carta del derecho Intrasferible" />
+                    <img class="front-face" src="img/intransferible.jpg" alt="Carta del derecho Intrasferible" />
                     <div class="back-face"> </div>
                 </div>
                 <div class="memory-card" data-number="cinco">
-                    <img class="front-face" src="img/cinco.png" alt="Carta del derecho Intrasferible" />
+                    <img class="front-face" src="img/intransferible.jpg" alt="Carta del derecho Intrasferible" />
                     <div class="back-face"> </div>
                 </div>
 
                 <div class="memory-card" data-number="seis">
-                    <img class="front-face" src="img/seis.png" alt="Carta del derecho Libre" />
+                    <img class="front-face" src="img/libre.jpg" alt="Carta del derecho Libre" />
                     <div class="back-face"> </div>
                 </div>
                 <div class="memory-card" data-number="seis">
-                    <img class="front-face" src="img/seis.png" alt="Carta del derecho Libre" />
+                    <img class="front-face" src="img/libre.jpg" alt="Carta del derecho Libre" />
                     <div class="back-face"> </div>
                 </div>
 
@@ -165,11 +165,11 @@
                     <div class="modal-header">
                         <h1 class="modal-title fs-1 tts-modal" id="title">Titulo del concepto</h1>
                     </div>
-                    <div class="modal-body align-content-center">
+                    <div class="modal-body align-content-center m-2">
                         <h2 class="tts-modal" id="concept">Concepto a describir</h2>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-lg tts-modal" data-bs-dismiss="modal" aria-label="Close" id="closemodal">Cerrar</button>
+                        <button type="button" class="btn btn-primary btn-lg tts-modal px-5" data-bs-dismiss="modal" aria-label="Close" id="closemodal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -181,11 +181,26 @@
                     <div class="modal-header">
                         <h1 class="modal-title fs-1" id="title">¡Ganaste!</h1>
                     </div>
-                    <div class="modal-body align-content-center">
+                    <div class="modal-body align-content-center text-center m-2">
                         <h2 id="concept">¡Ahora conoces las características del voto!</h2>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close" id="closewin">Cerrar</button>
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close" id="retrymodal">Jugar nuevamente</button>
+                        <button type="button" class="btn btn-primary btn-lg px-5" data-bs-dismiss="modal" aria-label="Close" id="closewin">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalformato" tabindex="-1" aria-labelledby="title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-1" id="title">Seleccion de Memorama</h1>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-lg px-5" data-bs-dismiss="modal" aria-label="Close" id="infant">Infantil</button>
+                        <button type="button" class="btn btn-primary btn-lg px-5" data-bs-dismiss="modal" aria-label="Close" id="juv">Juvenil</button>
                     </div>
                 </div>
             </div>

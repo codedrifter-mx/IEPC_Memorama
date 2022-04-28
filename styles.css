@@ -58,6 +58,32 @@ body {
   cursor: pointer;
 }
 
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #800e43 !important;
+  color: #FFF !important;
+  border-color: #800e43 !important;
+}
+
+.btn-primary:active,
+.btn-primary:hover {
+  box-shadow: 0 0 0 0.25rem #800e435f;
+}
+
+.btn:active,
+.btn:hover {
+  box-shadow: 0 0 0 0.25rem #800e435f;
+}
+
+.btn-check:focus + .btn-primary,
+.btn-primary:focus {
+  background-color: #800e43 !important;
+  color: #FFF !important;
+  box-shadow: 0 0 0 0.25rem #800e435f;
+}
+
 @media (min-width: 992px) {
   #pagetitle {
     position: relative;
@@ -152,6 +178,7 @@ img {
 
 .modal-footer {
   border-top: none;
+  justify-content: center;
 }
 
 .modal-content {
@@ -159,6 +186,8 @@ img {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 a {
