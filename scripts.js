@@ -1,15 +1,35 @@
 var isblind = false;
+var isJuvMode = false;
 var soundmaster = new Audio();
 
-const cards = document.querySelectorAll('.memory-card');
+let cards = document.querySelectorAll('.memory-card');
+let cards_juv = document.querySelectorAll('.memory');
+let cards_ext = document.querySelectorAll('.memory-ext');
+let hasFlippedCard = false;
+let lockBoard = false;
+let firstCard, secondCard;
+
 const ModalConcepto = new bootstrap.Modal(document.getElementById('modalconcepto'))
 const ModalVictoria = new bootstrap.Modal(document.getElementById('modalvictoria'))
 const ModalFormato = new bootstrap.Modal(document.getElementById('modalformato'))
+
+cards_juv.forEach(card => {
+    card.addEventListener('mouseover', tssHoverCard);
+});
+
+cards_juv.forEach(card => card.addEventListener('click', flipCard));
+
+cards_ext.forEach(card => {
+    card.style.visibility = "hidden";
+});
 
 document.getElementById("isblind").addEventListener("click", setBlind);
 document.getElementById("intro").addEventListener("click", playintro);
 document.getElementById("retry").addEventListener("click", retry);
 document.getElementById("retrymodal").addEventListener("click", retryByModal);
+document.getElementById("juv").addEventListener("click", setJuvMode);
+document.getElementById("juv").addEventListener("click", ttsPlayIntro);
+document.getElementById("infant").addEventListener("click", ttsPlayIntro);
 
 document.getElementById("labelisblind").addEventListener("mouseover", ttsIsBlind);
 document.getElementById("intro").addEventListener("mouseover", ttsTuto);
@@ -18,15 +38,9 @@ document.getElementById("retrymodal").addEventListener("mouseover", ttsRetry);
 document.getElementById("closemodal").addEventListener("mouseover", ttsCloseModal);
 document.getElementById("closewin").addEventListener("mouseover", ttsCloseModal);
 
-document.querySelectorAll(".memory-card").forEach(card => {
-    card.addEventListener('mouseover', tssHoverCard);
-});
-
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-
 
 const info = {
     "uno": {
@@ -102,13 +116,9 @@ const info_juv = {
     },
     "doce": {
         title: "Razonado",
-        concept: "Es la invitación que se hace a la persona electora a reflexionar antes de votar. Se le invita a que piense si las personas que van como candidatos o candidatas tienen la capacidad y el conocimiento necesario para trabajar en el puesto que pretenden ganar. Razonar nuestro voto."
+        concept: "Es la invitación que se hace a la persona electora a reflexionar antes de votar. Se le invita a que piense si las personas que van como candidatos o candidatas tienen la capacidad y el conocimiento necesario para trabajar en el puesto que pretenden ganar. Razonar nuestro voto es evitar influenciar nuestra decisión por cosas como el regalo de diferentes artículos por parte de los candidatos y candidatas."
     },
 }
-
-let hasFlippedCard = false;
-let lockBoard = false;
-let firstCard, secondCard;
 
 function flipCard() {
     if (lockBoard) return;
@@ -122,7 +132,12 @@ function flipCard() {
 
         if (isblind) {
             let key = firstCard.getAttribute("data-number");
-            tssReadCard(info[key]["title"])
+
+            if (isJuvMode) {
+                tssReadCard(info_juv[key]["title"])
+            } else {
+                tssReadCard(info[key]["title"])
+            }
         }
 
         firstCard.removeEventListener('mouseover', tssHoverCard);
@@ -134,11 +149,15 @@ function flipCard() {
 
     if (isblind) {
         let key = secondCard.getAttribute("data-number");
-        tssReadCard(info[key]["title"])
+
+        if (isJuvMode) {
+            tssReadCard(info_juv[key]["title"])
+        } else {
+            tssReadCard(info[key]["title"])
+        }
     }
 
     secondCard.removeEventListener('mouseover', tssHoverCard);
-
     checkForMatch();
 }
 
@@ -153,17 +172,26 @@ function disableCards() {
     secondCard.removeEventListener('click', flipCard);
 
     let key = secondCard.getAttribute("data-number");
-    document.getElementById("title").innerText = info[key]["title"];
-    document.getElementById("concept").innerText = info[key]["concept"];
+
+    if (isJuvMode) {
+        document.getElementById("title").innerText = info_juv[key]["title"];
+        document.getElementById("concept").innerText = info_juv[key]["concept"];
+    } else {
+        document.getElementById("title").innerText = info[key]["title"];
+        document.getElementById("concept").innerText = info[key]["concept"];
+    }
 
     ModalConcepto.show()
 
     if (isblind) {
-        tssReadModal(info[key]["title"])
+        if (isJuvMode) {
+            tssReadModal(info_juv[key]["title"])
+        } else {
+            tssReadModal(info[key]["title"])
+        }
     }
 
     resetBoard();
-
     checkCards();
 }
 
@@ -190,13 +218,24 @@ function resetBoard() {
 
 function checkCards() {
     let isVictory = true
-    cards.forEach(card => {
-        if (!isVictory) {
-            return
-        }
+    if (isJuvMode) {
+        cards_juv.forEach(card => {
+            if (!isVictory) {
+                return
+            }
 
-        isVictory = card.classList.contains('flip')
-    });
+            isVictory = card.classList.contains('flip')
+        });
+    } else {
+        cards.forEach(card => {
+            if (!isVictory) {
+                return
+            }
+
+            isVictory = card.classList.contains('flip')
+        });
+    }
+
 
     if (isVictory) {
         document.getElementById('modalconcepto').addEventListener('hidden.bs.modal', victoryEvent)
@@ -204,10 +243,18 @@ function checkCards() {
 }
 
 function shuffle() {
-    cards.forEach(card => {
-        let randomPos = Math.floor(Math.random() * 12);
-        card.style.order = randomPos;
-    });
+    if (isJuvMode) {
+        cards_juv.forEach(card => {
+            let randomPos = Math.floor(Math.random() * 12);
+            card.style.order = randomPos;
+        });
+    } else {
+        cards.forEach(card => {
+            let randomPos = Math.floor(Math.random() * 12);
+            card.style.order = randomPos;
+        });
+    }
+
 };
 
 function check(e) {
@@ -230,23 +277,75 @@ function victoryEvent(event) {
 function retry() {
     resetBoard()
     document.getElementById('modalconcepto').removeEventListener('hidden.bs.modal', victoryEvent)
-    cards.forEach(card => {
-        card.addEventListener('mouseover', tssHoverCard);
-        card.addEventListener('click', flipCard)
-        card.classList.remove('flip')
-    });
+
+    if (isJuvMode) {
+        cards_juv.forEach(card => {
+            card.addEventListener('mouseover', tssHoverCard);
+            card.addEventListener('click', flipCard)
+            card.classList.remove('flip')
+        });
+    } else {
+        cards.forEach(card => {
+            card.addEventListener('mouseover', tssHoverCard);
+            card.addEventListener('click', flipCard)
+            card.classList.remove('flip')
+        });
+    }
+
     shuffle()
 }
 
 function retryByModal() {
     resetBoard()
     document.getElementById('modalconcepto').removeEventListener('hidden.bs.modal', victoryEvent)
-    cards.forEach(card => {
-        card.addEventListener('mouseover', tssHoverCard);
-        card.addEventListener('click', flipCard)
-        card.classList.remove('flip')
-    });
+
+    if (isJuvMode) {
+        cards_juv.forEach(card => {
+            card.addEventListener('mouseover', tssHoverCard);
+            card.addEventListener('click', flipCard)
+            card.classList.remove('flip')
+        });
+    } else {
+        cards.forEach(card => {
+            card.addEventListener('mouseover', tssHoverCard);
+            card.addEventListener('click', flipCard)
+            card.classList.remove('flip')
+        });
+    }
+
     shuffle()
+}
+
+function setJuvMode() {
+    cards_juv.forEach(card => {
+        card.classList.add('memory-card-juv')
+    });
+
+    cards_ext.forEach(card => {
+        card.style.visibility = "visible";
+    });
+
+    shuffle()
+    isJuvMode = true;
+}
+
+function setKidMode() {
+    cards_juv.forEach(card => {
+        card.classList.remove('memory-card-juv')
+    });
+
+    shuffle()
+    isJuvMode = false;
+}
+
+async function ttsPlayIntro() {
+    soundmaster.pause()
+    soundmaster = new Audio('./audio/intro_1.mp3')
+    soundmaster.play()
+    await sleep(2200);
+    soundmaster.pause()
+    soundmaster = new Audio('./audio/intro_2.mp3')
+    soundmaster.play()
 }
 
 function ttsIsBlind() {
@@ -330,15 +429,4 @@ function tssReadModal(word) {
 }
 
 shuffle()
-
-cards.forEach(card => card.addEventListener('click', flipCard));
-
-//ModalFormato.show()
-
-soundmaster.pause()
-soundmaster = new Audio('./audio/intro_1.mp3')
-soundmaster.play()
-await sleep(2500);
-soundmaster.pause()
-soundmaster = new Audio('./audio/intro_2.mp3')
-soundmaster.play()
+ModalFormato.show()
