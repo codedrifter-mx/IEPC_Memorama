@@ -11,6 +11,7 @@ let firstCard, secondCard;
 
 const ModalConcepto = new bootstrap.Modal(document.getElementById('modalconcepto'))
 const ModalVictoria = new bootstrap.Modal(document.getElementById('modalvictoria'))
+const ModalDerrota = new bootstrap.Modal(document.getElementById('modalderrota'))
 const ModalFormato = new bootstrap.Modal(document.getElementById('modalformato'))
 
 cards_juv.forEach(card => {
@@ -27,16 +28,22 @@ document.getElementById("isblind").addEventListener("click", setBlind);
 document.getElementById("intro").addEventListener("click", playintro);
 document.getElementById("retry").addEventListener("click", retry);
 document.getElementById("retrymodal").addEventListener("click", retryByModal);
+document.getElementById("retrymodallose").addEventListener("click", retryByModal);
 document.getElementById("juv").addEventListener("click", setJuvMode);
 document.getElementById("juv").addEventListener("click", ttsPlayIntro);
 document.getElementById("infant").addEventListener("click", ttsPlayIntro);
-
 document.getElementById("labelisblind").addEventListener("mouseover", ttsIsBlind);
 document.getElementById("intro").addEventListener("mouseover", ttsTuto);
 document.getElementById("retry").addEventListener("mouseover", ttsRetry);
 document.getElementById("retrymodal").addEventListener("mouseover", ttsRetry);
 document.getElementById("closemodal").addEventListener("mouseover", ttsCloseModal);
+document.getElementById("closemodal").addEventListener("click", onCloseModal);
 document.getElementById("closewin").addEventListener("mouseover", ttsCloseModal);
+
+// start:
+var timer = startTimer(3 * 30 + 0.5, "timer", defeatEvent);
+// pause:
+timer.pause();
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -117,7 +124,37 @@ const info_juv = {
     "doce": {
         title: "Razonado",
         concept: "Es la invitación que se hace a la persona electora a reflexionar antes de votar. Se le invita a que piense si las personas que van como candidatos o candidatas tienen la capacidad y el conocimiento necesario para trabajar en el puesto que pretenden ganar. Razonar nuestro voto es evitar influenciar nuestra decisión por cosas como el regalo de diferentes artículos por parte de los candidatos y candidatas."
-    },
+    }
+}
+
+function startTimer(seconds, container, oncomplete) {
+    var startTime, timer, obj, ms = seconds * 1000,
+        display = document.getElementById(container);
+    obj = {};
+    obj.resume = function() {
+        startTime = new Date().getTime();
+        timer = setInterval(obj.step, 250); // adjust this number to affect granularity
+        // lower numbers are more accurate, but more CPU-expensive
+    };
+    obj.pause = function() {
+        ms = obj.step();
+        clearInterval(timer);
+    };
+    obj.step = function() {
+        var now = Math.max(0, ms - (new Date().getTime() - startTime)),
+            m = Math.floor(now / 60000),
+            s = Math.floor(now / 1000) % 60;
+        s = (s < 10 ? "0" : "") + s;
+        display.innerHTML = m + ":" + s;
+        if (now == 0) {
+            clearInterval(timer);
+            obj.resume = function() {};
+            if (oncomplete) oncomplete();
+        }
+        return now;
+    };
+    obj.resume();
+    return obj;
 }
 
 function flipCard() {
@@ -181,6 +218,7 @@ function disableCards() {
         document.getElementById("concept").innerText = info[key]["concept"];
     }
 
+    timer.pause()
     ModalConcepto.show()
 
     if (isblind) {
@@ -243,18 +281,17 @@ function checkCards() {
 }
 
 function shuffle() {
-    if (isJuvMode) {
-        cards_juv.forEach(card => {
-            let randomPos = Math.floor(Math.random() * 12);
-            card.style.order = randomPos;
-        });
-    } else {
-        cards.forEach(card => {
-            let randomPos = Math.floor(Math.random() * 12);
-            card.style.order = randomPos;
-        });
-    }
-
+    let ispair = false;
+    cards_juv.forEach(card => {
+        let randomPos;
+        if (ispair) {
+            randomPos = Math.floor(11 + Math.random() * 13);
+        } else {
+            randomPos = Math.floor(Math.random() * 12);
+        }
+        ispair = !ispair;
+        card.style.order = randomPos;
+    });
 };
 
 function check(e) {
@@ -272,6 +309,10 @@ function victoryEvent(event) {
     }
 
     ModalVictoria.show()
+}
+
+function defeatEvent(event) {
+    ModalDerrota.show()
 }
 
 function retry() {
@@ -292,7 +333,9 @@ function retry() {
         });
     }
 
+    timer.pause()
     shuffle()
+    timer = startTimer(3 * 30 + 0.5, "timer", defeatEvent);
 }
 
 function retryByModal() {
@@ -312,8 +355,9 @@ function retryByModal() {
             card.classList.remove('flip')
         });
     }
-
+    timer.pause()
     shuffle()
+    timer = startTimer(3 * 30 + 0.5, "timer", defeatEvent);
 }
 
 function setJuvMode() {
@@ -346,6 +390,9 @@ async function ttsPlayIntro() {
     soundmaster.pause()
     soundmaster = new Audio('./audio/intro_2.mp3')
     soundmaster.play()
+    await sleep(1500);
+
+    timer.resume();
 }
 
 function ttsIsBlind() {
@@ -372,10 +419,14 @@ function ttsCloseModal() {
     }
 }
 
-function ttsTuto() {
+function onCloseModal() {
+    timer.resume();
+}
+
+async function ttsTuto() {
     if (isblind) {
         soundmaster.pause()
-        soundmaster = new Audio('./audio/tuto.mp3')
+        soundmaster = new Audio('./audio/tuto_juv.mp3')
         soundmaster.play()
     }
 }
@@ -389,9 +440,17 @@ function setBlind() {
 }
 
 function playintro() {
+    timer.pause()
     soundmaster.pause()
-    soundmaster = new Audio('./audio/instrucciones.mp3')
+    soundmaster = new Audio('./audio/tuto_juv.mp3')
     soundmaster.play()
+
+    cards_juv.forEach(card => card.classList.add('mouse-disabled'))
+
+    setTimeout(function() {
+        cards_juv.forEach(card => card.classList.remove('mouse-disabled'))
+        timer.resume()
+    }, 25000);
 }
 
 function tssHoverCard() {
@@ -421,9 +480,15 @@ function tssFailCard() {
 }
 
 function tssReadModal(word) {
+
     if (isblind) {
         soundmaster.pause()
-        soundmaster = new Audio('./audio/' + word + '_concept.mp3')
+        if (isJuvMode) {
+            soundmaster = new Audio('./audio/' + word + '_juv_concept.mp3')
+
+        } else {
+            soundmaster = new Audio('./audio/' + word + '_concept.mp3')
+        }
         soundmaster.play()
     }
 }

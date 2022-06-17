@@ -211,6 +211,12 @@ a {
     background-color: transparent;
 }
 
+.mouse-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
 // /*--------------------------------------------------------------
 // # Top Bar
 // --------------------------------------------------------------*/
