@@ -7,78 +7,117 @@
 
     <link rel="icon" type="image/png" href="https://www.iepcdurango.mx/IEPC_DURANGO/logo.png">
 
-    <link rel="stylesheet" href="./bootstrap-5.1.3-dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="./icofont/icofont.min.css">
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" type="text/css" href="./bootstrap-5.1.3-dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="./icofont/icofont.min.css">
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link rel="stylesheet" type="text/css" href="./line-icons.css">
 </head>
 
 <body>
-    <!-- Header info -->
-    <button type="button" class="mobile-nav-toggle d-lg-none"><i class="icofont-navigation-menu"></i></button>
-    <section id="topbar" class="d-none d-lg-block" style="background: linear-gradient(to right, #59073B 0%, #910a61 80%, #59073B 100%);color: #fff !important;">
-        <div class="container d-flex">
-            <div class="contact-info me-auto" style="color: #fff !important;">
-                <i style="color: #fff !important;" class="icofont-envelope"></i><a href="mailto:ut.transparencia@iepcdurango.mx" style="color: #fff !important;">ut.transparencia@iepcdurango.mx</a>
-                <i style="color: #fff !important;" class="icofont-phone"></i> (618) 127-79-80
-            </div>
-            <div class="social-links" style="color: #fff !important;">
-                <a style="color: #fff !important;" href="#" class="twitter"><i class="icofont-twitter"></i></a>
-                <a style="color: #fff !important;" href="#" class="facebook"><i class="icofont-facebook"></i></a>
-                <a style="color: #fff !important;" href="#" class="instagram"><i class="icofont-instagram"></i></a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Heaver Navigation -->
-    <header id="header" style="    /*border-bottom: solid 3px #c2a857;border-top: solid 3px #c2a857;*/">
-        <div class="container d-flex">
-            <div class="logo me-auto">
-                <img src="https://www.iepcdurango.mx/x/logo.png" style="width: 48px;
-                height: 88px;
-                float: left;
-                margin-right: 13px;">
-                <h1 class="text-light" style=" float: left;font-size: 18px;"><a href="https://www.iepcdurango.mx//IEPC_DURANGO/"><span>IEPC DURANGO</span></a></h1>
+    <nav class="navbar navbar-expand-lg bg-inverse fixed-top scrolling-navbar top-nav-collapse" style="z-index: 10003; background: rgba(246, 249, 249, 0.67); border-bottom: 1px solid rgb(255, 255, 255);">
+        <div class="container">
 
-
-            </div>
-            <nav class="nav-menu d-none d-lg-block">
-                <ul>
-                    <li class="active"><a href="https://www.iepcdurango.mx//IEPC_DURANGO/"> INICIO</a></li>
-                    <li class="drop-down"><a href="#">INSTITUTO</a>
-                        <ul>
-                            <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/consejo_general">Consejo General</a></li>
-                            <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/comisiones">Comisiones</a></li>
-                            <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/normatividad">Normatividad</a></li>
-                            <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/partidos_politicos">Partidos Políticos</a></li>
-                            <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/vinculacion">Vinculación IEPC-INE</a></li>
-                            <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/iepcdurango">IEPC Durango</a></li>
-                            <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/informacion_historica">Información Histórica Electoral</a></li>
+            <a href="https://www.iepcdurango.mx/IEPC_DURANGO/sitio_oficial_2022" class="navbar-brand"><img src="https://www.iepcdurango.mx/IEPC_DURANGO//logo.png" alt="" style="    background: #fff;
+            border-radius: 65%;
+            padding: 6px;"></a>
+            <button class="navbar-toggler" id="maneobra" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" style="">
+        <i class="lni-menu"></i>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="https://www.iepcdurango.mx/IEPC_DURANGO/sitio_oficial_2022">
+        INICIO
+        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="INSTITUTO" data-toggle="modal" aria-haspopup="true" aria-expanded="false">
+        INSTITUTO ELECTORAL
+        </a>
+                        <ul class="dropdown-menu" href="#INSTITUTOs" id="INSTITUTOs">
+                            <li><a class="dropdown-item" href="https://iepcdurango.mx/IEPC_DURANGO/instituto_2022">¿QUIÉNES SOMOS?</a></li>
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/normatividad_2022">NORMATIVIDAD</a></li>
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/vinculacion_2022">VINCULACIÓN INE-IEPC</a></li>
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/servicio_profesional_electoral">SERVICIO PROFESIONAL</a></li>
+                            <li class="comunicame"><a class="dropdown-item" href="https://iepcdurango.mx/IEPC_DURANGO/medios_informacion_2022_all_news">COMUNICACIÓN</a>
+                                <ul>
+                                    <li class="consejeroomar_cam"><a class="goden" style="color: #000;font-size: 13px;" href="https://www.iepcdurango.mx/IEPC_DURANGO/medios_informacion_2022_encuestas">ENCUESTAS DE MONITOREO</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="consejerosekectora" data-toggle="modal" aria-haspopup="true" aria-expanded="false">
+        CONSEJO GENERAL
+        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" style=" text-align: justify;" href="https://www.iepcdurango.mx/IEPC_DURANGO/actas_2022_consejo_general">ACTAS</a></li>
+                            <li><a class="dropdown-item" style=" text-align: justify;" href="https://www.iepcdurango.mx/IEPC_DURANGO/acuerdos_2022_all_new/2022">ACUERDOS</a></li>
+                            <li><a class="dropdown-item" style=" text-align: justify;" href="https://www.iepcdurango.mx/IEPC_DURANGO/comisiones_2022">COMISIONES</a></li>
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/orden_del_dia_2022_consejo_general">ÓRDENES DEL DÍA</a></li>
+                            <li><a class="dropdown-item" style=" text-align: left;" href="https://iepcdurango.mx/IEPC_DURANGO/consejo_general_2022_iepc">INTEGRANTES DEL CONSEJO GENERAL</a></li>
+                            <li><a class="dropdown-item" style=" text-align: left;" href="https://www.iepcdurango.mx/IEPC_DURANGO/partidos_politicos_2022_iepc">PARTIDOS POLÍTICOS Y AGRUPACIONES</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="mujereseleonora" data-toggle="modal" aria-haspopup="true" aria-expanded="false">
+        MUJERES DURANGO
+        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://observatoriomujerdedurango.mx/">OBSERVATORIO DE LAS MUJERES DE DURANGO</a></li>
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/Red_de_Candidatas/" target="_blank">RED DE CANDIDATAS</a></li>
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/Red_de_Mujeres_Electas/" target="_blank">RED DE MUJERES ELECTAS</a></li>
 
                         </ul>
                     </li>
-                    <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/participacion_ciudadana">PARTICIPACIÓN CIUDADANA</a></li>
-                    <li class=""><a href="https://observatoriomujerdedurango.mx/">OBSERVATORIO MUJERES</a></li>
-                    <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/transparencia_ople">TRANSPARENCIA</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.iepcdurango.mx/IEPC_DURANGO/participacion_ciudadana_2022">
+        PARTICIPACIÓN CIUDADANA
+        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="transparentecoga" data-toggle="modal" aria-haspopup="true" aria-expanded="false">
+        TRANSPARENCIA
+        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/transparencia_inf_ley_2022">INFORMES Y LEYES DE TRANSPARENCIA</a></li>
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/transparencia_2022">COMITÉ DE TRANSPARENCIA</a></li>
+                            <li><a class="dropdown-item" href="https://consultapublicamx.inai.org.mx/vut-web/?idSujetoObigadoParametro=1844&amp;idEntidadParametro=10&amp;idSectorParametro=2" target="_blank">SOLICITA INFORMACIÓN AQUÍ</a></li>
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/informes/formatos_transparencia/2021/3">FORMATOS DE TRANSPARENCIA</a></li>
+                            <li><a class="dropdown-item" href="https://iepcdurango.mx/IEPC_DURANGO/documentos/2022/transparencia/cuotas_070322/COUTAS_DE_TRANSPARENCIA_2022.pdf" target="_blank">CUOTAS DE ACCESO A LA INFORMACIÓN</a></li>
+                            <li><a class="dropdown-item" href="https://www.iepcdurango.mx/IEPC_DURANGO/informes/avisos_de_privacidad">AVISOS DE PRIVACIDAD DEL INSTITUTO ELECTORAL</a></li>
+                        </ul>
+                    </li>
                 </ul>
-            </nav>
+            </div>
         </div>
-    </header>
+    </nav>
 
+    <div class="my-4 py-3"></div>
     <!-- Titles -->
-    <header class="my-4">
+    <header class="my-3">
         <div class="container">
             <div class="row text-center">
-                <h1 id="pagetitle" class="tts">Memorama del Voto Ciudadano</h1>
-                <h2 id="subtitle" class="opacity-75 tts">El voto y sus características</h2>
+                <div class="col-11">
+                    <div class="pr-2">
+                        <h1 id="pagetitle" class="tts">Memorama del Voto Ciudadano</h1>
+                        <h2 id="subtitle" class="opacity-75 tts">El voto y sus características</h2>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <h2 id="timer">0:00</h2>
+                </div>
             </div>
         </div>
     </header>
 
-    <div class="my-2">
+    <div class="my-1">
         <div class="container">
             <div class="row text-center">
                 <div class="col">
-                    <input type="checkbox" class="btn-check" id="isblind" autocomplete="off">
+                    <input type="checkbox" class="btn btn-check" id="isblind" autocomplete="off">
                     <label class="btn btn-primary" for="isblind" id="labelisblind">Discapacidad</label>
                 </div>
 
@@ -96,59 +135,113 @@
     <!-- Card Game -->
     <main>
         <div class="container">
-            <section class="memory-game mb-5">
-                <div class="memory-card" data-number="uno">
-                    <img class="front-face" src="img/uno.png" alt="Carta del derecho Universal" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+            <section class="memory-game">
+                <div class="memory memory-card" data-number="uno">
+                    <img class="front-face" src="img/universal.jpg" alt="Carta del derecho Universal" />
+                    <div class="back-face"> </div>
                 </div>
-                <div class="memory-card" data-number="uno">
-                    <img class="front-face" src="img/uno.png" alt="Carta del derecho Universal" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
-                </div>
-
-                <div class="memory-card" data-number="dos">
-                    <img class="front-face" src="img/dos.png" alt="Carta del derecho Secreto" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
-                </div>
-                <div class="memory-card" data-number="dos">
-                    <img class="front-face" src="img/dos.png" alt="Carta del derecho Secreto" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                <div class="memory memory-card" data-number="uno">
+                    <img class="front-face" src="img/universal.jpg" alt="Carta del derecho Universal" />
+                    <div class="back-face"> </div>
                 </div>
 
-                <div class="memory-card" data-number="tres">
-                    <img class="front-face" src="img/tres.png" alt="Carta del derecho Directo" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                <div class="memory memory-card" data-number="dos">
+                    <img class="front-face" src="img/secreto.jpg" alt="Carta del derecho Secreto" />
+                    <div class="back-face"> </div>
                 </div>
-                <div class="memory-card" data-number="tres">
-                    <img class="front-face" src="img/tres.png" alt="Carta del derecho Directo" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
-                </div>
-
-                <div class="memory-card" data-number="cuatro">
-                    <img class="front-face" src="img/cuatro.png" alt="Carta del derecho Personal" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
-                </div>
-                <div class="memory-card" data-number="cuatro">
-                    <img class="front-face" src="img/cuatro.png" alt="Carta del derecho Personal" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                <div class="memory memory-card" data-number="dos">
+                    <img class="front-face" src="img/secreto.jpg" alt="Carta del derecho Secreto" />
+                    <div class="back-face"> </div>
                 </div>
 
-                <div class="memory-card" data-number="cinco">
-                    <img class="front-face" src="img/cinco.png" alt="Carta del derecho Intrasferible" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                <div class="memory memory-card" data-number="tres">
+                    <img class="front-face" src="img/directo.jpg" alt="Carta del derecho Directo" />
+                    <div class="back-face"> </div>
                 </div>
-                <div class="memory-card" data-number="cinco">
-                    <img class="front-face" src="img/cinco.png" alt="Carta del derecho Intrasferible" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                <div class="memory memory-card" data-number="tres">
+                    <img class="front-face" src="img/directo.jpg" alt="Carta del derecho Directo" />
+                    <div class="back-face"> </div>
                 </div>
 
-                <div class="memory-card" data-number="seis">
-                    <img class="front-face" src="img/seis.png" alt="Carta del derecho Libre" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                <div class="memory memory-card" data-number="cuatro">
+                    <img class="front-face" src="img/personal.jpg" alt="Carta del derecho Personal" />
+                    <div class="back-face"> </div>
                 </div>
-                <div class="memory-card" data-number="seis">
-                    <img class="front-face" src="img/seis.png" alt="Carta del derecho Libre" />
-                    <img class="back-face" src="img/iepc_logo.svg" alt="Logo del IEPC" />
+                <div class="memory memory-card" data-number="cuatro">
+                    <img class="front-face" src="img/personal.jpg" alt="Carta del derecho Personal" />
+                    <div class="back-face"> </div>
+                </div>
+
+                <div class="memory memory-card" data-number="cinco">
+                    <img class="front-face" src="img/intransferible.jpg" alt="Carta del derecho Intrasferible" />
+                    <div class="back-face"> </div>
+                </div>
+                <div class="memory memory-card" data-number="cinco">
+                    <img class="front-face" src="img/intransferible.jpg" alt="Carta del derecho Intrasferible" />
+                    <div class="back-face"> </div>
+                </div>
+
+                <div class="memory memory-card" data-number="seis">
+                    <img class="front-face" src="img/libre.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+                <div class="memory memory-card" data-number="seis">
+                    <img class="front-face" src="img/libre.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+
+                <div class="memory memory-ext" data-number="siete">
+                    <img class="front-face" src="img/voluntario.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+                <div class="memory memory-ext" data-number="siete">
+                    <img class="front-face" src="img/voluntario.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+
+                <div class="memory memory-ext" data-number="ocho">
+                    <img class="front-face" src="img/obligatorio.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+                <div class="memory memory-ext" data-number="ocho">
+                    <img class="front-face" src="img/obligatorio.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+
+                <div class="memory memory-ext" data-number="nueve">
+                    <img class="front-face" src="img/gratuito.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+                <div class="memory memory-ext" data-number="nueve">
+                    <img class="front-face" src="img/gratuito.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+
+                <div class="memory memory-ext" data-number="diez">
+                    <img class="front-face" src="img/condicionado.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+                <div class="memory memory-ext" data-number="diez">
+                    <img class="front-face" src="img/condicionado.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+
+                <div class="memory memory-ext" data-number="once">
+                    <img class="front-face" src="img/informado.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+                <div class="memory memory-ext" data-number="once">
+                    <img class="front-face" src="img/informado.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+
+                <div class="memory memory-ext" data-number="doce">
+                    <img class="front-face" src="img/razonado.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
+                </div>
+                <div class="memory memory-ext" data-number="doce">
+                    <img class="front-face" src="img/razonado.jpg" alt="Carta del derecho Libre" />
+                    <div class="back-face"> </div>
                 </div>
 
             </section>
@@ -157,66 +250,91 @@
     </main>
 
 
+
+    <div class="my-2">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col">
+                    <div id="visits">...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Boostrap Modal -->
     <section>
         <div class="modal fade" id="modalconcepto" tabindex="-1" aria-labelledby="title" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-lg-down mt-3 py-5">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-1 tts-modal" id="title">Titulo del concepto</h1>
                     </div>
-                    <div class="modal-body align-content-center">
+                    <div class="modal-body align-content-center m-2">
                         <h2 class="tts-modal" id="concept">Concepto a describir</h2>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-lg tts-modal" data-bs-dismiss="modal" aria-label="Close" id="closemodal">Cerrar</button>
+                        <button type="button" class="btn btn-primary btn-lg tts-modal px-5" data-bs-dismiss="modal" aria-label="Close" id="closemodal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalderrota" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-1" id="title">Intenta de nuevo</h1>
+                    </div>
+                    <div class="modal-body align-content-center text-center m-2">
+                        <h2 id="concept">¡Vamos! tienes muchas oportunidades</h2>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-lg px-5" data-bs-dismiss="modal" aria-label="Close" id="retrymodallose">Jugar nuevamente</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="modal fade" id="modalvictoria" tabindex="-1" aria-labelledby="title" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-1" id="title">¡Ganaste!</h1>
                     </div>
-                    <div class="modal-body align-content-center">
+                    <div class="modal-body align-content-center text-center m-2">
                         <h2 id="concept">¡Ahora conoces las características del voto!</h2>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close" id="closewin">Cerrar</button>
+                        <button type="button" class="btn btn-primary btn-lg px-5" data-bs-dismiss="modal" aria-label="Close" id="retrymodal">Jugar nuevamente</button>
+                        <button type="button" class="btn btn-primary btn-lg px-5" data-bs-dismiss="modal" aria-label="Close" id="closewin">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalformato" tabindex="-1" aria-labelledby="title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-1" id="title">Selecciona una dificultad</h1>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-lg px-5" data-bs-dismiss="modal" aria-label="Close" id="infant">Infantil</button>
+                        <button type="button" class="btn btn-primary btn-lg px-5" data-bs-dismiss="modal" aria-label="Close" id="juv">Juvenil</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Navigation -->
-    <nav class="mobile-nav d-lg-none">
-        <ul>
-            <li class="active"><a href="https://www.iepcdurango.mx//IEPC_DURANGO/"> INICIO</a></li>
-            <li class="drop-down"><a href="#">INSTITUTO</a>
-                <ul>
-                    <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/consejo_general">Consejo General</a></li>
-                    <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/comisiones">Comisiones</a></li>
-                    <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/normatividad">Normatividad</a></li>
-                    <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/partidos_politicos">Partidos Políticos</a></li>
-                    <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/vinculacion">Vinculación IEPC-INE</a></li>
-                    <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/iepcdurango">IEPC Durango</a></li>
-                    <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/informacion_historica">Información Histórica Electoral</a></li>
-
-                </ul>
-            </li>
-            <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/participacion_ciudadana">PARTICIPACIÓN CIUDADANA</a></li>
-            <li class=""><a href="https://observatoriomujerdedurango.mx/">OBSERVATORIO MUJERES</a></li>
-            <li class=""><a href="https://www.iepcdurango.mx/IEPC_DURANGO/transparencia_ople">TRANSPARENCIA</a></li>
-
-        </ul>
-    </nav>
-    <div class="mobile-nav-overly" style="display: none;"></div>
     <script src="./bootstrap-5.1.3-dist/js/bootstrap.js"></script>
     <script src="./node_modules\talkify-tts\dist\talkify.min.js"></script>
+    <!-- <script>
+        function cb(response) {
+            document.getElementById('visits').innerText = "Pagina visitada por " + response.value + " personas.";
+        }
+    </script> -->
+    <script async src="https://api.countapi.xyz/hit/codedrifter.ddns.net/visits?callback=cb"></script>
     <script type="module" src="./scripts.js"></script>
 </body>
 
