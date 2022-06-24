@@ -25,7 +25,7 @@ body {
 #pagetitle {
     position: relative;
     text-decoration: underline;
-    @include font-size(3rem);
+    @include font-size(2rem);
     font-weight: bold;
     // color: #ffffff;
     color: #560a24;
@@ -34,7 +34,7 @@ body {
 
 #subtitle {
     position: relative;
-    @include font-size(2.5rem);
+    @include font-size(1.5rem);
     font-weight: bold;
     // color: #ffffff;
     color: #560a24;
@@ -146,8 +146,22 @@ body {
         box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
         cursor: pointer;
     }
+    .btn-lg {
+        padding: 50px 48px !important;
+        text-transform: uppercase;
+        font-size: 22px !important;
+    }
 }
 
+.btn-lg {
+    padding: 35px 40px !important;
+    text-transform: uppercase;
+    font-size: 18px !important;
+}
+
+// .modal-footer {
+//     display: block;
+// }
 .memory:active {
     transform: scale(0.97);
     transition: transform 0.2s;
@@ -1316,7 +1330,7 @@ ol li {
 .section-title:before {
     content: "⁛⁛⁛⁛⁛⁛〉";
     color: #c3a858;
-    padding-right: 10px;
+    // padding-right: 10px;
     font-weight: 900
 }
 
@@ -4093,7 +4107,7 @@ a.coga_click:hover {
     .section-title::before {
         content: "⁛⁛〉";
         color: #c3a858;
-        padding-right: 10px;
+        // padding-right: 10px;
         font-weight: 900
     }
     .section-title::after {

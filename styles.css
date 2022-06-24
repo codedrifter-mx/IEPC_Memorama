@@ -18,27 +18,27 @@ body {
 #pagetitle {
   position: relative;
   text-decoration: underline;
-  font-size: calc(1.425rem + 2.1vw);
+  font-size: calc(1.325rem + 0.9vw);
   font-weight: bold;
   color: #560a24;
   font-family: "Poppins", sans-serif;
 }
 @media (min-width: 1200px) {
   #pagetitle {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 }
 
 #subtitle {
   position: relative;
-  font-size: calc(1.375rem + 1.5vw);
+  font-size: calc(1.275rem + 0.3vw);
   font-weight: bold;
   color: #560a24;
   font-family: "Poppins", sans-serif;
 }
 @media (min-width: 1200px) {
   #subtitle {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -166,6 +166,19 @@ body {
     cursor: pointer;
   }
 }
+@media (min-width: 992px) {
+  .btn-lg {
+    padding: 50px 48px !important;
+    text-transform: uppercase;
+    font-size: 22px !important;
+  }
+}
+.btn-lg {
+  padding: 35px 40px !important;
+  text-transform: uppercase;
+  font-size: 18px !important;
+}
+
 .memory:active {
   transform: scale(0.97);
   transition: transform 0.2s;
@@ -1060,7 +1073,6 @@ ol li {
 .section-title:before {
   content: "⁛⁛⁛⁛⁛⁛〉";
   color: #c3a858;
-  padding-right: 10px;
   font-weight: 900;
 }
 
@@ -3846,7 +3858,6 @@ a.coga_click:hover {
   .section-title::before {
     content: "⁛⁛〉";
     color: #c3a858;
-    padding-right: 10px;
     font-weight: 900;
   }
 
