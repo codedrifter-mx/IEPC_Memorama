@@ -180,6 +180,11 @@ body {
     font-size: 18px !important;
   }
 }
+@media (min-width: 992px) {
+  #title-text {
+    padding-left: 8rem !important;
+  }
+}
 .btn-lg {
   padding: 35px 40px !important;
   text-transform: uppercase;

@@ -2,9 +2,11 @@ var isblind = false;
 var isJuvMode = false;
 var soundmaster = new Audio();
 
-let cards = document.querySelectorAll('.memory-card');
-let cards_juv = document.querySelectorAll('.memory');
-let cards_ext = document.querySelectorAll('.memory-ext');
+
+let cards_easy = document.querySelectorAll('.memory-card');
+let cards_all = document.querySelectorAll('.memory');
+let cards_hard = document.querySelectorAll('.memory-ext');
+let background_audio = document.querySelector("audio");
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
@@ -14,13 +16,14 @@ const ModalVictoria = new bootstrap.Modal(document.getElementById('modalvictoria
 const ModalDerrota = new bootstrap.Modal(document.getElementById('modalderrota'))
 const ModalFormato = new bootstrap.Modal(document.getElementById('modalformato'))
 
-cards_juv.forEach(card => {
+var timer = startTimer(5 * 30 + 0.5, "timer", defeatEvent);
+timer.pause();
+
+cards_all.forEach(card => {
     card.addEventListener('mouseover', tssHoverCard);
 });
-
-cards_juv.forEach(card => card.addEventListener('click', flipCard));
-
-cards_ext.forEach(card => {
+cards_all.forEach(card => card.addEventListener('click', flipCard));
+cards_hard.forEach(card => {
     card.style.visibility = "hidden";
 });
 
@@ -29,20 +32,18 @@ document.getElementById("intro").addEventListener("click", playintro);
 document.getElementById("retry").addEventListener("click", retry);
 document.getElementById("retrymodal").addEventListener("click", retry);
 document.getElementById("retrymodallose").addEventListener("click", retry);
-document.getElementById("juv").addEventListener("click", setJuvMode);
+document.getElementById("juv").addEventListener("click", setHardMode);
 document.getElementById("juv").addEventListener("click", ttsPlayIntro);
 document.getElementById("infant").addEventListener("click", ttsPlayIntro);
-document.getElementById("infant").addEventListener("click", setKidMode);
+document.getElementById("infant").addEventListener("click", setEasyMode);
 document.getElementById("labelisblind").addEventListener("mouseover", ttsIsBlind);
 document.getElementById("retry").addEventListener("mouseover", ttsRetry);
 document.getElementById("retrymodal").addEventListener("mouseover", ttsRetry);
 document.getElementById("closemodal").addEventListener("mouseover", ttsCloseModal);
 document.getElementById("closemodal").addEventListener("click", onCloseModal);
 document.getElementById("closewin").addEventListener("mouseover", ttsCloseModal);
-let audioback = document.querySelector("audio");
 
-var timer = startTimer(5 * 30 + 0.5, "timer", defeatEvent);
-timer.pause();
+
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -256,10 +257,18 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
 }
 
+function resetTimer() {
+    var oldcanv = document.getElementById('fatherTimer');
+
+    let html = `<h2 id="timer">0:00</h2>`
+
+    oldcanv.innerHTML = html
+}
+
 function checkCards() {
     let isVictory = true
     if (isJuvMode) {
-        cards_juv.forEach(card => {
+        cards_all.forEach(card => {
             if (!isVictory) {
                 return
             }
@@ -267,7 +276,7 @@ function checkCards() {
             isVictory = card.classList.contains('flip')
         });
     } else {
-        cards.forEach(card => {
+        cards_easy.forEach(card => {
             if (!isVictory) {
                 return
             }
@@ -284,7 +293,7 @@ function checkCards() {
 
 function shuffle() {
     let ispair = false;
-    cards_juv.forEach(card => {
+    cards_all.forEach(card => {
         let randomPos;
         if (ispair) {
             randomPos = Math.floor(11 + Math.random() * 13);
@@ -295,12 +304,6 @@ function shuffle() {
         card.style.order = randomPos;
     });
 };
-
-function check(e) {
-    if (e.key === "Enter") {
-        ModalConcepto.hide()
-    }
-}
 
 function victoryEvent(event) {
     timer.pause()
@@ -323,7 +326,7 @@ function retry() {
     resetBoard()
     document.getElementById('modalconcepto').removeEventListener('hidden.bs.modal', victoryEvent)
 
-    cards_juv.forEach(card => {
+    cards_all.forEach(card => {
         card.addEventListener('mouseover', tssHoverCard);
         card.addEventListener('click', flipCard)
         card.classList.remove('flip')
@@ -333,51 +336,34 @@ function retry() {
     ModalFormato.show()
 }
 
-function setJuvMode() {
-    audioback.volume = 0.2;
-    audioback.play();
-
-    cards_juv.forEach(card => {
+function setHardMode() {
+    cards_all.forEach(card => {
         card.classList.add('memory-card-juv')
     });
 
-    cards_ext.forEach(card => {
+    cards_hard.forEach(card => {
         card.style.visibility = "visible";
     });
 
-    timer.pause()
-    resetTimer()
     shuffle()
-    timer = startTimer(10 * 30 + 0.5, "timer", defeatEvent);
 
     isJuvMode = true;
 }
 
-function setKidMode() {
-    audioback.volume = 0.2;
-    audioback.play();
-
-    cards_juv.forEach(card => {
+function setEasyMode() {
+    cards_all.forEach(card => {
         card.classList.remove('memory-card-juv')
     });
 
-    timer.pause()
-    resetTimer()
     shuffle()
-    timer = startTimer(5 * 30 + 0.5, "timer", defeatEvent);
 
     isJuvMode = false;
 }
 
-function resetTimer() {
-    var oldcanv = document.getElementById('fatherTimer');
-
-    let html = `<h2 id="timer">0:00</h2>`
-
-    oldcanv.innerHTML = html
-}
-
 async function ttsPlayIntro() {
+    background_audio.volume = 0.2;
+    background_audio.play();
+
     soundmaster.pause()
     soundmaster = new Audio('./audio/intro_1.mp3')
     soundmaster.play()
@@ -387,7 +373,14 @@ async function ttsPlayIntro() {
     soundmaster.play()
     await sleep(1500);
 
-    timer.resume();
+    timer.pause()
+    resetTimer()
+    if (isJuvMode) {
+        timer = startTimer(10 * 30 + 0.5, "timer", defeatEvent);
+    } else {
+        timer = startTimer(5 * 30 + 0.5, "timer", defeatEvent);
+    }
+    timer.resume()
 }
 
 function ttsIsBlind() {
@@ -433,10 +426,10 @@ function playintro() {
     soundmaster = new Audio('./audio/tuto_juv.mp3')
     soundmaster.play()
 
-    cards_juv.forEach(card => card.classList.add('mouse-disabled'))
+    cards_all.forEach(card => card.classList.add('mouse-disabled'))
 
     setTimeout(function() {
-        cards_juv.forEach(card => card.classList.remove('mouse-disabled'))
+        cards_all.forEach(card => card.classList.remove('mouse-disabled'))
 
         if (isJuvMode) {
             timer = startTimer(10 * 30 + 0.5, "timer", defeatEvent);
