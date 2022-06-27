@@ -487,5 +487,4 @@ function tssReadModal(word) {
 }
 
 shuffle()
-    // ModalFormato.show()
-ModalVictoria.show()
+ModalFormato.show()
