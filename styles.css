@@ -120,14 +120,13 @@ body {
 
 .text-modal {
   font-size: 25px !important;
-  display: block;
+  margin: auto !important;
 }
 
 .text-container {
-  display: flex;
-  align-items: center;
-  margin: auto;
-  /* align vertical */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 @media (min-width: 992px) {
