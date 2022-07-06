@@ -38,6 +38,10 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+#titleintro {
+    font-size: 2rem !important;
+}
+
 .memory-game {
     margin: auto;
     display: flex;
@@ -100,7 +104,7 @@ body {
 }
 
 .btn-lg {
-    padding: 35px 40px !important;
+    padding: 35px 35px !important;
     text-transform: uppercase;
     font-size: 18px !important;
 }
@@ -109,6 +113,18 @@ body {
     padding: 24px 25px !important;
     text-transform: uppercase;
     font-size: 18px !important;
+}
+
+.label-form {
+    font-size: calc(1rem + 0.5vw) !important;
+    font-weight: 700;
+    font-family: roboto, sans-serif;
+    text-align: center;
+    text-justify: inter-word;
+}
+
+input {
+    border: 1px solid #800e43 !important;
 }
 
 .text-modal {
@@ -165,11 +181,6 @@ body {
         transition: transform 0.3s;
         box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
         cursor: pointer;
-    }
-    .btn-lg {
-        padding: 50px 48px !important;
-        text-transform: uppercase;
-        font-size: 22px !important;
     }
     .btn-lg-custom {
         padding: 24px 30px !important;

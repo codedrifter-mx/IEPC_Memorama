@@ -1,14 +1,13 @@
-var isblind = false;
-var isJuvMode = false;
-var soundmaster = new Audio();
+var isBlind = false;
+var isHardMode = false;
+var SoundEfects = new Audio();
 
-
+let BackgroundMusic = document.querySelector("audio");
 let cards_easy = document.querySelectorAll('.memory-card');
-let cards_all = document.querySelectorAll('.memory');
 let cards_hard = document.querySelectorAll('.memory-ext');
-let background_audio = document.querySelector("audio");
-let hasFlippedCard = false;
+let cards_all = document.querySelectorAll('.memory');
 let lockBoard = false;
+let hasFlippedCard = false;
 let firstCard, secondCard;
 
 const ModalConcepto = new bootstrap.Modal(document.getElementById('modalconcepto'))
@@ -16,7 +15,7 @@ const ModalVictoria = new bootstrap.Modal(document.getElementById('modalvictoria
 const ModalDerrota = new bootstrap.Modal(document.getElementById('modalderrota'))
 const ModalFormato = new bootstrap.Modal(document.getElementById('modalformato'))
 
-const timer = startTimer(5 * 30 + 10.5, "timer", defeatEvent);
+const timer = startTimer(5 * 30 + .5, "timer", defeatEvent);
 timer.pause();
 
 cards_all.forEach(card => {
@@ -26,29 +25,29 @@ cards_all.forEach(card => card.addEventListener('click', flipCard));
 cards_hard.forEach(card => {
     card.style.visibility = "hidden";
 });
+document.getElementById("infant").classList.add('mouse-disabled')
+document.getElementById("juv").classList.add('mouse-disabled')
 
+document.getElementById("name").addEventListener("keyup", validateData);
+document.getElementById("school").addEventListener("keyup", validateData);
+document.getElementById("grade").addEventListener("keyup", validateData);
 document.getElementById("isblind").addEventListener("click", setBlind);
-document.getElementById("intro").addEventListener("click", playintro);
-document.getElementById("retry").addEventListener("click", retry);
-document.getElementById("retrymodal").addEventListener("click", retry);
-document.getElementById("retrymodallose").addEventListener("click", retry);
+document.getElementById("intro").addEventListener("click", playTutorial);
+document.getElementById("retry").addEventListener("click", retryGame);
+document.getElementById("retrymodal").addEventListener("click", retryGame);
+document.getElementById("retrymodallose").addEventListener("click", retryGame);
 document.getElementById("juv").addEventListener("click", setHardMode);
-document.getElementById("juv").addEventListener("click", ttsPlayIntro);
-document.getElementById("infant").addEventListener("click", ttsPlayIntro);
+document.getElementById("juv").addEventListener("click", playGreetings);
+document.getElementById("infant").addEventListener("click", playGreetings);
 document.getElementById("infant").addEventListener("click", setEasyMode);
-document.getElementById("intro").addEventListener("mouseover", tssInstrucciones);
-document.getElementById("labelisblind").addEventListener("mouseover", ttsIsBlind);
-document.getElementById("retry").addEventListener("mouseover", ttsRetry);
-document.getElementById("retrymodal").addEventListener("mouseover", ttsRetry);
-document.getElementById("closemodal").addEventListener("mouseover", ttsCloseModal);
-document.getElementById("closemodal").addEventListener("click", onCloseModal);
-document.getElementById("closewin").addEventListener("mouseover", ttsCloseModal);
-
-
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
+document.getElementById("intro").addEventListener("mouseover", function() { tssByWord("instrucciones", true) });
+document.getElementById("labelisblind").addEventListener("mouseover", function() { tssByWord("off", true) });
+document.getElementById("retry").addEventListener("mouseover", function() { tssByWord("again", true) });
+document.getElementById("retrymodallose").addEventListener("mouseover", function() { tssByWord("again", true) });
+document.getElementById("retrymodal").addEventListener("mouseover", function() { tssByWord("again", true) });
+document.getElementById("closemodal").addEventListener("mouseover", tssClose);
+document.getElementById("closewin").addEventListener("mouseover", tssClose);
+document.getElementById("closemodal").addEventListener("click", restartTimer);
 
 const info = {
     "uno": {
@@ -184,13 +183,13 @@ function flipCard() {
         hasFlippedCard = true;
         firstCard = this;
 
-        if (isblind) {
+        if (isBlind) {
             let key = firstCard.getAttribute("data-number");
 
-            if (isJuvMode) {
-                tssReadCard(info_juv[key]["title"])
+            if (isHardMode) {
+                tssByWord(info_juv[key]["title"])
             } else {
-                tssReadCard(info[key]["title"])
+                tssByWord(info[key]["title"])
             }
         }
 
@@ -201,13 +200,13 @@ function flipCard() {
 
     secondCard = this;
 
-    if (isblind) {
+    if (isBlind) {
         let key = secondCard.getAttribute("data-number");
 
-        if (isJuvMode) {
-            tssReadCard(info_juv[key]["title"])
+        if (isHardMode) {
+            tssByWord(info_juv[key]["title"])
         } else {
-            tssReadCard(info[key]["title"])
+            tssByWord(info[key]["title"])
         }
     }
 
@@ -228,7 +227,7 @@ function disableCards() {
 
     let key = secondCard.getAttribute("data-number");
 
-    if (isJuvMode) {
+    if (isHardMode) {
         document.getElementById("title").innerText = info_juv[key]["title"];
         document.getElementById("concept").innerText = info_juv[key]["concept"];
     } else {
@@ -238,11 +237,11 @@ function disableCards() {
 
     ModalConcepto.show()
 
-    if (isblind) {
-        if (isJuvMode) {
-            tssReadModal(info_juv[key]["title"])
+    if (isBlind) {
+        if (isHardMode) {
+            tssConceptByWord(info_juv[key]["title"])
         } else {
-            tssReadModal(info[key]["title"])
+            tssConceptByWord(info[key]["title"])
         }
     }
 
@@ -253,11 +252,10 @@ function disableCards() {
 function unflipCards() {
     lockBoard = true;
 
-
-
-    tssFailCard()
-
     setTimeout(() => {
+
+        tssByWord("unflip", true)
+
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
 
@@ -265,7 +263,7 @@ function unflipCards() {
         secondCard.addEventListener('mouseover', tssHoverCard);
 
         resetBoard();
-    }, 1000);
+    }, 1200);
 }
 
 function resetBoard() {
@@ -273,10 +271,9 @@ function resetBoard() {
     [firstCard, secondCard] = [null, null];
 }
 
-
 function checkCards() {
     let isVictory = true
-    if (isJuvMode) {
+    if (isHardMode) {
         cards_all.forEach(card => {
             if (!isVictory) {
                 return
@@ -317,10 +314,10 @@ function shuffle() {
 function victoryEvent(event) {
     timer.pause()
 
-    if (isblind) {
-        soundmaster.pause()
-        soundmaster = new Audio('./audio/win.mp3')
-        soundmaster.play()
+    if (isBlind) {
+        SoundEfects.pause()
+        SoundEfects = new Audio('./audio/win.mp3')
+        SoundEfects.play()
     }
 
     ModalVictoria.show()
@@ -330,7 +327,26 @@ function defeatEvent(event) {
     ModalDerrota.show()
 }
 
-function retry() {
+function validateData() {
+    let fullname = document.getElementById('name').value
+    let school = document.getElementById('school').value
+    let grade = document.getElementById('grade').value
+
+    if (fullname.length !== 0 && school.length !== 0 && grade.length !== 0) {
+        document.getElementById("infant").classList.add('mouse-disabled')
+        document.getElementById("juv").classList.add('mouse-disabled')
+        document.getElementById("infant").classList.remove('mouse-disabled')
+        document.getElementById("juv").classList.remove('mouse-disabled')
+    } else {
+        document.getElementById("infant").classList.remove('mouse-disabled')
+        document.getElementById("juv").classList.remove('mouse-disabled')
+        document.getElementById("infant").classList.add('mouse-disabled')
+        document.getElementById("juv").classList.add('mouse-disabled')
+    }
+}
+
+function retryGame() {
+    timer.pause()
     resetBoard()
     document.getElementById('modalconcepto').removeEventListener('hidden.bs.modal', victoryEvent)
 
@@ -355,7 +371,7 @@ function setHardMode() {
 
     shuffle()
 
-    isJuvMode = true;
+    isHardMode = true;
 }
 
 function setEasyMode() {
@@ -365,65 +381,14 @@ function setEasyMode() {
 
     shuffle()
 
-    isJuvMode = false;
+    isHardMode = false;
 }
 
-async function ttsPlayIntro() {
-    if (isJuvMode) {
-        timer.set_seconds(10 * 30 + 10.5, "timer", defeatEvent);
-    } else {
-        timer.set_seconds(5 * 30 + 10.5, "timer", defeatEvent);
-    }
-
-    background_audio.volume = 0.1;
-    background_audio.play();
-
-    soundmaster.pause()
-    soundmaster = new Audio('./audio/intro_1.mp3')
-    soundmaster.play()
-
-}
-
-function ttsIsBlind() {
-    if (isblind) {
-        soundmaster.pause()
-        soundmaster = new Audio('./audio/off.mp3')
-        soundmaster.play()
-    }
-}
-
-function ttsRetry() {
-    if (isblind) {
-        soundmaster.pause()
-        soundmaster = new Audio('./audio/again.mp3')
-        soundmaster.play()
-    }
-}
-
-function ttsCloseModal() {
-    if (isblind) {
-        soundmaster = new Audio('./audio/closemodal.mp3')
-        soundmaster.play()
-    }
-}
-
-function onCloseModal() {
-    timer.resume();
-}
-
-function setBlind() {
-    isblind = !isblind
-
-    if (isblind) {
-        playintro()
-    }
-}
-
-function playintro() {
+function playTutorial() {
     timer.pause()
-    soundmaster.pause()
-    soundmaster = new Audio('./audio/tuto_juv.mp3')
-    soundmaster.play()
+    SoundEfects.pause()
+    SoundEfects = new Audio('./audio/tutorial.mp3')
+    SoundEfects.play()
 
     cards_all.forEach(card => card.classList.add('mouse-disabled'))
 
@@ -431,6 +396,41 @@ function playintro() {
     document.getElementById("retry").classList.add('mouse-disabled')
     document.getElementById("intro").classList.add('mouse-disabled')
 
+    setTimeout(function() {
+        cards_all.forEach(card => card.classList.remove('mouse-disabled'))
+        document.getElementById("labelisblind").classList.remove('mouse-disabled')
+        document.getElementById("retry").classList.remove('mouse-disabled')
+        document.getElementById("intro").classList.remove('mouse-disabled')
+
+        if (isHardMode) {
+            timer.set_seconds(10 * 30 + .5, "timer", defeatEvent);
+        } else {
+            timer.set_seconds(5 * 30 + .5, "timer", defeatEvent);
+        }
+
+    }, 33000);
+}
+
+async function playGreetings() {
+    BackgroundMusic.volume = 0.1;
+    BackgroundMusic.play();
+
+    if (isHardMode) {
+        timer.set_seconds(10 * 30 + .5, "timer", defeatEvent);
+    } else {
+        timer.set_seconds(5 * 30 + .5, "timer", defeatEvent);
+    }
+    timer.pause()
+
+    SoundEfects.pause()
+    SoundEfects = new Audio('./audio/greetings.mp3')
+    SoundEfects.play()
+
+    cards_all.forEach(card => card.classList.add('mouse-disabled'))
+
+    document.getElementById("labelisblind").classList.add('mouse-disabled')
+    document.getElementById("retry").classList.add('mouse-disabled')
+    document.getElementById("intro").classList.add('mouse-disabled')
 
     setTimeout(function() {
         cards_all.forEach(card => card.classList.remove('mouse-disabled'))
@@ -438,58 +438,57 @@ function playintro() {
         document.getElementById("retry").classList.remove('mouse-disabled')
         document.getElementById("intro").classList.remove('mouse-disabled')
 
-        if (isJuvMode) {
-            timer.set_seconds(10 * 30 + 10.5, "timer", defeatEvent);
-        } else {
-            timer.set_seconds(5 * 30 + 10.5, "timer", defeatEvent);
-        }
+        timer.resume()
+    }, 4000);
 
-    }, 33000);
+}
 
+function restartTimer() {
+    SoundEfects.pause()
+
+    timer.resume()
+}
+
+function setBlind() {
+    isBlind = !isBlind
+
+    if (isBlind) {
+        playTutorial()
+    }
 }
 
 function tssHoverCard() {
-    if (isblind) {
-        soundmaster = new Audio('./audio/flip.mp3')
-        soundmaster.play()
+    if (isBlind) {
+        SoundEfects = new Audio('./audio/flip.mp3')
+        SoundEfects.play()
     }
 }
 
-function tssInstrucciones() {
-    if (isblind) {
-        soundmaster.pause()
-        soundmaster = new Audio('./audio/instrucciones.mp3')
-        soundmaster.play()
+function tssClose() {
+    if (isBlind) {
+        new Audio('./audio/close.mp3').play()
     }
 }
 
-function tssReadCard(word) {
-    if (isblind) {
-        soundmaster.pause()
-        soundmaster = new Audio('./audio/' + word + '.mp3')
-        soundmaster.play()
+function tssByWord(word, paused = false) {
+    if (isBlind) {
+        if (paused) SoundEfects.pause()
+        SoundEfects = new Audio('./audio/' + word + '.mp3')
+        SoundEfects.play()
     }
 }
 
-function tssFailCard() {
-    if (isblind) {
-        soundmaster.pause()
-        soundmaster = new Audio('./audio/unflip.mp3')
-        soundmaster.play()
-    }
-}
-
-function tssReadModal(word) {
-
-    if (isblind) {
-        soundmaster.pause()
-        if (isJuvMode) {
-            soundmaster = new Audio('./audio/' + word + '_juv_concept.mp3')
+function tssConceptByWord(word) {
+    if (isBlind) {
+        SoundEfects.pause()
+        if (isHardMode) {
+            SoundEfects = new Audio('./audio/' + word + '_juv_concept.mp3')
 
         } else {
-            soundmaster = new Audio('./audio/' + word + '_concept.mp3')
+            SoundEfects = new Audio('./audio/' + word + '_concept.mp3')
         }
-        soundmaster.play()
+        SoundEfects.play()
+        console.log(SoundEfects)
     }
 }
 

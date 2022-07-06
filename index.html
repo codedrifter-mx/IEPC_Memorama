@@ -287,10 +287,10 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-1" id="title">Intenta de nuevo</h1>
+                        <h1 class="modal-title fs-1">Intenta de nuevo</h1>
                     </div>
                     <div class="modal-body align-content-center text-center m-2">
-                        <h2 id="concept">¡Vamos! tienes muchas oportunidades</h2>
+                        <h2>¡Vamos! tienes muchas oportunidades</h2>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary btn-lg px-5" data-bs-dismiss="modal" aria-label="Close" id="retrymodallose">Jugar nuevamente</button>
@@ -300,13 +300,14 @@
         </div>
 
         <div class="modal fade" id="modalvictoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="title" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-xl modal-fullscreen-lg-down mt-3 pt-5 pb-4 p-3">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-1" id="title">¡Ganaste!</h1>
+                        <h1 class="modal-title fs-1">¡Ganaste!</h1>
                     </div>
                     <div class="modal-body align-content-center text-center m-2">
-                        <h2 id="concept">¡Ahora conoces las características del voto!</h2>
+                        <h2>¡Ahora conoces las características del voto! <br><br>¡Gracias por participar! Al final de este año, el participante y la institución educativa que reúnan más jugadas ganarán un premio que será entregado por el IEPC, así que puedes
+                            jugar las veces que quieras e invitar a tus compañeros y compañeras de clase a participar.</h2>
                     </div>
                     <div class="modal-footer row">
                         <div class="container">
@@ -328,14 +329,35 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title fs-1" id="title">Selecciona una dificultad</h2>
+                        <h5 class="modal-title fs-1" id="titleintro">Hola, registrate y elije una dificultad</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-4 col-form-label label-form">Nombre completo:</label>
+                                <div class="text-container col-sm-8">
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="school" class="col-sm-4 col-form-label label-form">Institución educativa:</label>
+                                <div class="text-container col-sm-8">
+                                    <input type="text" class="form-control" id="school">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="grade" class="col-sm-4 col-form-label label-form">Grado:</label>
+                                <div class="text-container col-sm-8">
+                                    <input type="text" class="form-control" id="grade">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <div class="container">
                             <div class="row text-center">
                                 <div class="col-6 p-0">
                                     <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close" id="infant">Infantil</button>
-
                                 </div>
                                 <div class="col-6 p-0">
                                     <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close" id="juv">Juvenil</button>
@@ -349,7 +371,6 @@
     </section>
 
     <script src="./bootstrap-5.1.3-dist/js/bootstrap.js"></script>
-    <script src="./node_modules\talkify-tts\dist\talkify.min.js"></script>
     <script>
         function cb(response) {
             document.getElementById('visits').innerText = "Pagina visitada por " + response.value + " personas.";
