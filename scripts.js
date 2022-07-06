@@ -432,6 +432,25 @@ async function playGreetings() {
     document.getElementById("retry").classList.add('mouse-disabled')
     document.getElementById("intro").classList.add('mouse-disabled')
 
+    let fullname = document.getElementById('name').value
+    let school = document.getElementById('school').value
+    let grade = document.getElementById('grade').value
+
+    axios({
+            method: 'post',
+            url: 'http://localhost:5000/insert',
+            data: { fullname: fullname, school: school, grade: grade, },
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
+        })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => console.error(error));
+
+
     setTimeout(function() {
         cards_all.forEach(card => card.classList.remove('mouse-disabled'))
         document.getElementById("labelisblind").classList.remove('mouse-disabled')
