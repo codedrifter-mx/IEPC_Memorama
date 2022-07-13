@@ -259,11 +259,15 @@ function unflipCards() {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
 
+        [hasFlippedCard, lockBoard] = [false, false];
+    }, 1200);
+
+    setTimeout(() => {
         firstCard.addEventListener('mouseover', tssHoverCard);
         secondCard.addEventListener('mouseover', tssHoverCard);
 
-        resetBoard();
-    }, 1200);
+        [firstCard, secondCard] = [null, null];
+    }, 1210);
 }
 
 function resetBoard() {
@@ -438,7 +442,7 @@ async function playGreetings() {
 
     axios({
             method: 'post',
-            url: 'http://localhost:5000/insert',
+            url: 'https://codedrifter.ddns.net:5000/insert',
             data: { fullname: fullname, school: school, grade: grade, },
             headers: {
                 'Content-Type': 'application/json',
