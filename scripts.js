@@ -256,7 +256,7 @@ function unflipCards() {
     try {
         setTimeout(() => {
 
-            const isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
+            const isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 
 
             if (!isMobile) {
