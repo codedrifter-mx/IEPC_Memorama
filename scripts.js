@@ -178,6 +178,7 @@ function flipCard() {
     if (this === firstCard) return;
 
     this.classList.add('flip');
+    tssByWord('paper')
 
     if (!hasFlippedCard) {
         hasFlippedCard = true;
@@ -252,22 +253,31 @@ function disableCards() {
 function unflipCards() {
     lockBoard = true;
 
-    setTimeout(() => {
+    try {
+        setTimeout(() => {
 
-        tssByWord("unflip", true)
+            tssByWord("unflip", true)
 
+            firstCard.classList.remove('flip');
+            secondCard.classList.remove('flip');
+            tssByWord('paper')
+
+
+            hasFlippedCard = false;
+        }, 1200);
+
+        setTimeout(() => {
+            firstCard.addEventListener('mouseover', tssHoverCard);
+            secondCard.addEventListener('mouseover', tssHoverCard);
+
+            [firstCard, secondCard, lockBoard] = [null, null, false];
+        }, 2000);
+    } catch (error) {
         firstCard.classList.remove('flip');
         secondCard.classList.remove('flip');
+        resetBoard()
+    }
 
-        [hasFlippedCard, lockBoard] = [false, false];
-    }, 1200);
-
-    setTimeout(() => {
-        firstCard.addEventListener('mouseover', tssHoverCard);
-        secondCard.addEventListener('mouseover', tssHoverCard);
-
-        [firstCard, secondCard] = [null, null];
-    }, 1210);
 }
 
 function resetBoard() {
