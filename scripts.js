@@ -256,8 +256,10 @@ function unflipCards() {
     try {
         setTimeout(() => {
 
-            if (!(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ||
-                    !(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.platform)))) {
+            const isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
+
+
+            if (!isMobile) {
                 tssByWord("unflip", true)
             }
 
