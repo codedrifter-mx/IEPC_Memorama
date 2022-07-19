@@ -178,7 +178,7 @@ function flipCard() {
     if (this === firstCard) return;
 
     this.classList.add('flip');
-    tssByWord('paper')
+    tssPaper()
 
     if (!hasFlippedCard) {
         hasFlippedCard = true;
@@ -256,11 +256,15 @@ function unflipCards() {
     try {
         setTimeout(() => {
 
-            tssByWord("unflip", true)
+            if (!(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ||
+                    !(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.platform)))) {
+                tssByWord("unflip", true)
+            }
+
 
             firstCard.classList.remove('flip');
             secondCard.classList.remove('flip');
-            tssByWord('paper')
+            tssPaper()
 
 
             hasFlippedCard = false;
@@ -501,6 +505,10 @@ function tssClose() {
     if (isBlind) {
         new Audio('./audio/close.mp3').play()
     }
+}
+
+function tssPaper() {
+    new Audio('./audio/paper.mp3').play()
 }
 
 function tssByWord(word, paused = false) {
