@@ -256,6 +256,7 @@ function unflipCards() {
     try {
         setTimeout(() => {
 
+            tssByWord('unflip')
 
             firstCard.classList.remove('flip');
             secondCard.classList.remove('flip');
